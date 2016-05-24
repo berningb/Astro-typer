@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<html ng-app="thing">
+<!-- SCROLLS -->
+<!-- load bootstrap and fontawesome via CDN -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+<link rel="stylesheet" href="style.css" />
+
+<!-- SPELLS -->
+<!-- load angular and angular route via CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Lato:100,900,400' rel='stylesheet' type='text/css'>
+<script src="myScript.js"></script>
+<script src="script.js"></script>
+
+<body>
+    <div id='back'>
+        <div class='container-fluid'>
+            <div class='row'>
+                <div class='col-xs-2' id='left'>
+                    <div id='paragraphs'>
+                        <a href='#beginner' onclick='hide()'>
+                            <div id='first' class='para'>
+                                <div class='inside'>Beginner</div>
+                            </div>
+                        </a>
+                        <a href='#easy' onclick='hide()'>
+                            <div id='second' class='para'>
+                                <div class='inside'>Easy</div>
+                            </div>
+                        </a>
+                        <a href='#medium' onclick='hide()'>
+                            <div id='third' class='para'>
+                                <div class='inside'>Medium</div>
+                            </div>
+                        </a>
+                        <a href='#hard' onclick='hide()'>
+                            <div id='fourth' class='para'>
+                                <div class='inside'>Hard</div>
+                            </div>
+                        </a>
+                        <a href='#impossible' onclick='hide()'>
+                            <div id='fifth' class='para'>
+                                <div class='inside'>Impossible</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class='col-xs-8' id='mid'>
+                    <div id='title'>
+                        <div id='inner-title'>Astro-typer</div>
+                        <div id='sub-title'>A typing simulator</div>
+                    </div>
+                    <div ng-view></div>
+                </div>
+
+                <div class='col-xs-2' id=' right '>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

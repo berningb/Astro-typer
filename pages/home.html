@@ -1,0 +1,28 @@
+<div id='displayText'>
+
+
+    <span ng-repeat='word in display track by $index' id={{$index}}>
+        {{word}}
+    </span>
+
+</div>
+
+
+
+
+<div id='input'>
+
+    <span id='txt'>
+        <input id='myInput' placeholder="Get Ready!">
+    </span>
+
+</div>
+
+<div id='btn-hold'>
+    <button id='btn' onclick='show()'>New Paragraph</button>
+    <button id='btn2' onclick='begin()'>Start</button>
+    <div id='stat'>
+        <div id='time'>0:0:0:00</div>
+        <div id='wpm'></div>
+    </div>
+</div>
