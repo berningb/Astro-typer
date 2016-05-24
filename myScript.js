@@ -2,16 +2,13 @@ window.onload = function () {
     var i = 0;
 
     document.body.onkeyup = function (e) {
-        console.log(wordArr);
         splitWord(wordArr[i]);
-        console.log(wordArr[i] + ' word');
         var a = document.getElementById('myInput').value.replace(/\s/g, '');
         var b = a;
         if (a == wordArr[i]) {
             changetextColor(i, b.length, b)
             $('#myInput').val("");
             if (wordArr[i + 1] == undefined) {
-                console.log('hey you won');
                 document.getElementById('myInput').placeholder = 'You WIN!';
                 document.getElementById('myInput').disabled = true;
                 stopTimer();
@@ -55,13 +52,10 @@ function formatMilis(milis) {
     var curretnmilis = milis;
     var hours = Math.floor(curretnmilis / 360000);
     curretnmilis %= 360000;
-    console.log(curretnmilis);
     var minutes = Math.floor(curretnmilis / 6000);
     curretnmilis %= 6000;
-    console.log(curretnmilis);
     var sec = Math.floor(curretnmilis / 100);
     curretnmilis %= 100;
-    console.log(curretnmilis);
 
     var timerThing = "";
     timerThing += hours + ":" + minutes + ":" + sec + ":" + curretnmilis;
@@ -90,6 +84,7 @@ function stopTimer() {
 
 
 function show() {
+    stopTimer();
     if (document.getElementById('paragraphs').style.left == '0px') {
         document.getElementById('paragraphs').style.left = '-500px';
     } else {
