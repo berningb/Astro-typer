@@ -22,7 +22,7 @@ button:focus {
 }
 
 #displayText {
-    height: 300px;
+    height: auto;
     width: 80%;
     margin: auto;
     font-size: 1.7em;

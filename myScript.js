@@ -1,112 +1,124 @@
-    window.onload = function () {
-        var i = 0;
-        var start = true;
-
-        document.body.onkeyup = function (e) {
-            splitWord(wordArr[i]);
-            var a = document.getElementById('myInput').value.replace(/\s/g, '');
-            var b = a;
-            if (start) {
-                begin();
-                console.log('hey');
-                start = false;
-            }
-            if (a == wordArr[i]) {
-                changetextColor(i, b.length, b)
-                $('#myInput').val("");
-                if (wordArr[i + 1] == undefined) {
-                    document.getElementById('myInput').placeholder = 'You WIN!';
-                    document.getElementById('myInput').disabled = true;
-                    stopTimer();
-                    document.getElementById('wpm').innerHTML = (milis / wordArr.length) + ' words/min';
-                    i = 0;
-                } else {
-                    i++;
-                }
+var go = true;
+var i = 0;
+window.onload = function () {
+    document.body.onkeyup = function (e) {
+        splitWord(wordArr[i]);
+        var a = document.getElementById('myInput').value.replace(/\s/g, '');
+        var b = a;
+        tryit();
+        console.log(a);
+        console.log(wordArr[i]);
+        if (a == wordArr[i]) {
+            changetextColor(i, b.length, b)
+            $('#myInput').val("");
+            if (wordArr[i + 1] == undefined) {
+                document.getElementById('myInput').placeholder = 'You WIN!';
+                document.getElementById('myInput').disabled = true;
+                stopTimer();
+                document.getElementById('wpm').innerHTML = (milis / wordArr.length) + ' words/min';
+                i = 0;
             } else {
-                $('#myInput').val(b);
+                i++;
             }
-        }
-    };
-
-    var inter,
-        milis = 0;
-
-    function changetextColor(id, inputLength, word) {
-        splitWord(word);
-        var x = document.getElementById(id),
-            txt = x.textContent.replace(/\s/g, ''),
-            newText = "";
-        for (var i = 0, l = inputLength; i < l; i++) {
-            newText += txt.charAt(i).fontcolor('grey');
-        }
-        x.innerHTML = newText + ' ';
-    }
-
-    function split(arr) {
-        wordArr = arr.split(' ');
-    }
-
-
-    function splitWord(word) {
-        letterArr = word.split('');
-    }
-
-
-    function formatMilis(milis) {
-
-        var curretnmilis = milis;
-        var hours = Math.floor(curretnmilis / 360000);
-        curretnmilis %= 360000;
-        var minutes = Math.floor(curretnmilis / 6000);
-        curretnmilis %= 6000;
-        var sec = Math.floor(curretnmilis / 100);
-        curretnmilis %= 100;
-
-        var timerThing = "";
-        timerThing += hours + ":" + minutes + ":" + sec + ":" + curretnmilis;
-
-
-        return timerThing;
-
-    }
-
-    function begin() {
-        inter = setInterval(function () {
-            start()
-        }, 10);
-    }
-
-    function start() {
-        milis++;
-        document.getElementById("time").innerHTML = formatMilis(milis);
-
-    }
-
-    function stopTimer() {
-        clearInterval(inter)
-    }
-
-
-
-    function show() {
-        stopTimer();
-        if (document.getElementById('paragraphs').style.left == '0px') {
-            document.getElementById('paragraphs').style.left = '-500px';
         } else {
-            document.getElementById('paragraphs').style.left = '0px';
+            $('#myInput').val(b);
         }
     }
+};
 
-    function hide() {
-        document.getElementById('paragraphs').style.left = '-500px';
+var inter,
+    milis = 0;
+
+function tryit() {
+    if (go) {
+        begin();
+        go = false;
     }
+}
 
-    var wordArr = [];
-    var letterArr = [];
-    var wordlist = "testing this";
-    var beginner = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 ofectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 ofectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of";
-    var easy = "This is probably the easiest thing i've ever done! I can't believe how simple it is to type out what is on the page.";
-    var medium = "This is so medium";
-    var hard = "This is so hard";
-    var impossible = "This is so impossible";
+
+function changetextColor(id, inputLength, word) {
+    splitWord(word);
+    var x = document.getElementById(id),
+        txt = x.textContent.replace(/\s/g, ''),
+        newText = "";
+    for (var i = 0, l = inputLength; i < l; i++) {
+        newText += txt.charAt(i).fontcolor('grey');
+    }
+    x.innerHTML = newText + ' ';
+}
+
+function split(arr) {
+    wordArr = arr.split(' ');
+}
+
+
+function splitWord(word) {
+    letterArr = word.split('');
+}
+
+
+function formatMilis(milis) {
+
+    var curretnmilis = milis;
+    var hours = Math.floor(curretnmilis / 360000);
+    curretnmilis %= 360000;
+    var minutes = Math.floor(curretnmilis / 6000);
+    curretnmilis %= 6000;
+    var sec = Math.floor(curretnmilis / 100);
+    curretnmilis %= 100;
+
+    var timerThing = "";
+    timerThing += hours + ":" + minutes + ":" + sec + ":" + curretnmilis;
+
+
+    return timerThing;
+
+}
+
+function begin() {
+    inter = setInterval(function () {
+        start();
+    }, 10);
+}
+
+function start() {
+    milis++;
+    document.getElementById("time").innerHTML = formatMilis(milis);
+
+}
+
+function stopTimer() {
+    clearInterval(inter);
+    go = true;
+}
+
+
+
+function show() {
+    stopTimer();
+    if (document.getElementById('paragraphs').style.left == '0px') {
+        document.getElementById('paragraphs').style.left = '-500px';
+    } else {
+        document.getElementById('paragraphs').style.left = '0px';
+    }
+}
+
+function hide() {
+    document.getElementById('paragraphs').style.left = '-500px';
+    go = true;
+    reset();
+}
+
+function reset() {
+    clearInterval(inter);
+    milis = 0;
+}
+var wordArr = [];
+var letterArr = [];
+var wordlist = "Welcome to Astro-Typer! Feel free to click on the other paragraphs button, and test your skills as a typing ninja!";
+var beginner = "A black hole is a place in space where gravity pulls so much that even light can not get out.The gravity is so strong because matter has been squeezed into a tiny space.This can happen when a star is dying.";
+var easy = "The term planet is ancient, with ties to history, science, mythology, and religion. The planets were originally seen by many early cultures as divine, or as emissaries of deities. As scientific knowledge advanced, human perception of the planets changed, incorporating a number of disparate objects.";
+var medium = "Basically, stars are big exploding balls of gas, mostly hydrogen and helium. Our nearest star, the Sun, is so hot that the huge amount of hydrogen is undergoing a constant star-wide nuclear reaction, like in a hydrogen bomb. Even though it is constantly exploding in a nuclear reaction, the Sun and other stars are so large and have so much matter in them that it will take billions of years for the explosion to use all the 'fuel' in the star.";
+var hard = "Comets are often referred to as 'dirty snowballs'. They are left over from the formation of stars and planets billions of years ago. Before zipping around the Sun with their characteristic big tails, comets that we see in our solar system start out as big chunks of rock and ice just floating around in something called the Oort Cloud. When the gravity from a large passing body, like a star, becomes strong enough, some large chunks of ice get pulled away from the cloud and head toward the Sun. ";
+var impossible = "The NASA roadmap will continue with the launch of the Transiting Exoplanet Surveying Satellite (TESS) in 2017, the James Webb Space Telescope (Webb Telescope) in 2018, and perhaps the proposed Wide Field Infrared Survey Telescope - Astrophysics Focused Telescope Assets (WFIRST-AFTA) early in the next decade. These upcoming telescopes will find and characterize a host of new exoplanets -- those planets that orbit other stars -- expanding our knowledge of their atmospheres and diversity. The Webb telescope and WFIRST-AFTA will lay the groundwork, and future missions will extend the search for oceans in the form of atmospheric water vapor and for life as in carbon dioxide and other atmospheric chemicals, on nearby planets that are similar to Earth in size and mass, a key step in the search for life.";
