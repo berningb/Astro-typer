@@ -1,24 +1,41 @@
 var go = true;
 var i = 0;
+var thig = 0;
+
 window.onload = function () {
+
+
     document.body.onkeyup = function (e) {
+        document.getElementById('myInput').placeholder = '';
+        var x = document.getElementById(thig);
+        x.style.color = 'green';
         splitWord(wordArr[i]);
         var a = document.getElementById('myInput').value.replace(/\s/g, '');
         var b = a;
-        tryit();
-        console.log(a);
+        console.log(document.getElementById('myInput').value);
+        if (document.getElementById('myInput').value != " ") {
+            tryit();
+        }
         console.log(wordArr[i]);
+        check(a, b);
+
+    }
+
+    function check(a, b) {
         if (a == wordArr[i]) {
             changetextColor(i, b.length, b)
             $('#myInput').val("");
             if (wordArr[i + 1] == undefined) {
-                document.getElementById('myInput').placeholder = 'You WIN!';
+                document.getElementById('myInput').placeholder = 'Wow that was great! Try out another paragraph! Or reset!';
                 document.getElementById('myInput').disabled = true;
                 stopTimer();
-                document.getElementById('wpm').innerHTML = (milis / wordArr.length) + ' words/min';
+                //                document.getElementById('wpm').innerHTML = (milis / wordArr.length) + ' words/min';
                 i = 0;
             } else {
                 i++;
+                thig++;
+                var y = document.getElementById(thig);
+                y.style.color = 'green';
             }
         } else {
             $('#myInput').val(b);
@@ -34,6 +51,7 @@ function tryit() {
         begin();
         go = false;
     }
+
 }
 
 
@@ -69,7 +87,10 @@ function formatMilis(milis) {
     curretnmilis %= 100;
 
     var timerThing = "";
+
+
     timerThing += hours + ":" + minutes + ":" + sec + ":" + curretnmilis;
+
 
 
     return timerThing;
@@ -77,6 +98,8 @@ function formatMilis(milis) {
 }
 
 function begin() {
+    console.log('begins');
+
     inter = setInterval(function () {
         start();
     }, 10);
@@ -85,12 +108,12 @@ function begin() {
 function start() {
     milis++;
     document.getElementById("time").innerHTML = formatMilis(milis);
-
 }
 
 function stopTimer() {
     clearInterval(inter);
     go = true;
+    i = 0;
 }
 
 
@@ -111,12 +134,13 @@ function hide() {
 }
 
 function reset() {
-    clearInterval(inter);
-    milis = 0;
+    location.reload();
+
 }
 var wordArr = [];
 var letterArr = [];
-var wordlist = "Welcome to Astro-Typer! Feel free to click on the other paragraphs button, and test your skills as a typing ninja!";
+//Astro-Typer! Simply type inside the input box to get started. At any point, feel free to switch paragraphs by clicking the "new paragraph" button below. 
+var wordlist = 'Welcome to ';
 var beginner = "A black hole is a place in space where gravity pulls so much that even light can not get out.The gravity is so strong because matter has been squeezed into a tiny space.This can happen when a star is dying.";
 var easy = "The term planet is ancient, with ties to history, science, mythology, and religion. The planets were originally seen by many early cultures as divine, or as emissaries of deities. As scientific knowledge advanced, human perception of the planets changed, incorporating a number of disparate objects.";
 var medium = "Basically, stars are big exploding balls of gas, mostly hydrogen and helium. Our nearest star, the Sun, is so hot that the huge amount of hydrogen is undergoing a constant star-wide nuclear reaction, like in a hydrogen bomb. Even though it is constantly exploding in a nuclear reaction, the Sun and other stars are so large and have so much matter in them that it will take billions of years for the explosion to use all the 'fuel' in the star.";
