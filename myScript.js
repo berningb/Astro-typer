@@ -1,24 +1,31 @@
 var go = true;
 var i = 0;
 var thig = 0;
+var wordsCompleted = 0;
+var won = false;
+var wpm = 0;
 
 window.onload = function () {
 
 
     document.body.onkeyup = function (e) {
-        document.getElementById('myInput').placeholder = '';
-        var x = document.getElementById(thig);
-        x.style.color = 'green';
-        splitWord(wordArr[i]);
-        var a = document.getElementById('myInput').value.replace(/\s/g, '');
-        var b = a;
-        console.log(document.getElementById('myInput').value);
-        if (document.getElementById('myInput').value != " ") {
-            tryit();
-        }
-        console.log(wordArr[i]);
-        check(a, b);
+        if (won) {
 
+        } else {
+            wpm = Math.round(i / (milis / 6000));
+            console.log(wpm)
+            document.getElementById('wpm').innerHTML = wpm + ' words/min';
+            document.getElementById('myInput').placeholder = '';
+            var x = document.getElementById(thig);
+            x.style.color = 'green';
+            var a = document.getElementById('myInput').value.replace(/\s/g, '');
+            var b = a;
+            if (document.getElementById('myInput').value != " ") {
+                tryit();
+            }
+            check(a, b);
+
+        }
     }
 
     function check(a, b) {
@@ -29,13 +36,16 @@ window.onload = function () {
                 document.getElementById('myInput').placeholder = 'Wow that was great! Try out another paragraph! Or reset!';
                 document.getElementById('myInput').disabled = true;
                 stopTimer();
-                //                document.getElementById('wpm').innerHTML = (milis / wordArr.length) + ' words/min';
+                won = true;
                 i = 0;
             } else {
                 i++;
                 thig++;
+                wordsCompleted++;
                 var y = document.getElementById(thig);
                 y.style.color = 'green';
+                console.log(wordsCompleted);
+                console.log(wpm);
             }
         } else {
             $('#myInput').val(b);
@@ -140,7 +150,7 @@ function reset() {
 var wordArr = [];
 var letterArr = [];
 //Astro-Typer! Simply type inside the input box to get started. At any point, feel free to switch paragraphs by clicking the "new paragraph" button below. 
-var wordlist = 'Welcome to ';
+var wordlist = 'Welcome to';
 var beginner = "A black hole is a place in space where gravity pulls so much that even light can not get out.The gravity is so strong because matter has been squeezed into a tiny space.This can happen when a star is dying.";
 var easy = "The term planet is ancient, with ties to history, science, mythology, and religion. The planets were originally seen by many early cultures as divine, or as emissaries of deities. As scientific knowledge advanced, human perception of the planets changed, incorporating a number of disparate objects.";
 var medium = "Basically, stars are big exploding balls of gas, mostly hydrogen and helium. Our nearest star, the Sun, is so hot that the huge amount of hydrogen is undergoing a constant star-wide nuclear reaction, like in a hydrogen bomb. Even though it is constantly exploding in a nuclear reaction, the Sun and other stars are so large and have so much matter in them that it will take billions of years for the explosion to use all the 'fuel' in the star.";
